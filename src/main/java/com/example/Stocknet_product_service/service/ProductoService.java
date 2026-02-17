@@ -13,4 +13,7 @@ public interface ProductoService {
 
     void eliminar(Long id);              // físico
     Producto cambiarEstado(Long id, Boolean estado); // lógico
+    
+    Producto guardar(Producto producto);
+
 }

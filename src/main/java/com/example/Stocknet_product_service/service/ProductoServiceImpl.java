@@ -19,6 +19,12 @@ public class ProductoServiceImpl implements ProductoService {
     public List<Producto> listarTodos() {
         return repo.findAll();
     }
+    
+    @Override
+    public Producto guardar(Producto producto) {
+        return repo.save(producto);
+    }
+
 
     @Override
     public List<Producto> listarActivos() {

@@ -38,6 +38,26 @@ public class ProductoController {
     public Producto crear(@Valid @RequestBody Producto producto) {
         return service.crear(producto);
     }
+    
+    @PutMapping("/{id}/reducir-stock")
+    public Producto reducirStock(@PathVariable Long id,
+                                 @RequestParam int cantidad) {
+
+        Producto producto = service.obtenerPorId(id);
+
+        if (producto == null) {
+            throw new RuntimeException("Producto no encontrado");
+        }
+
+        if (producto.getStock() < cantidad) {
+            throw new RuntimeException("Stock insuficiente");
+        }
+
+        producto.setStock(producto.getStock() - cantidad);
+
+        return service.guardar(producto);
+    }
+
 
     @PutMapping("/{id}")
     public Producto actualizar(@PathVariable Long id, @Valid @RequestBody Producto producto) {
